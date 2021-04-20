@@ -33,7 +33,7 @@
             <p>by&nbsp;<a href="http://localhost:3000/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><br></p>
             <p><strong><%= details.author.subscriber_count %></strong>&nbsp;subscribers<br></p>
             <p><%- details.description.replace(/[\n]/g, "<br>") %></p>
-						<label for='format'><b>Video Format:</b></label>
+						<label for='format'><b>Video Quality:</b></label>
 						<select name='formats' id='format'>
 							<% formats.forEach(function(format){ %>
 								<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>

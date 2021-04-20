@@ -6,5 +6,5 @@ $('#player').ready(() => {
 	}
 	setInterval(() => {
 		localStorage.setItem(query, document.getElementById('player').currentTime);
-	}, 30000);
+	}, 5000);
 })
