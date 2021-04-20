@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<title><%= details.title %> / Hyzen</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+		<script src='/js/jquery.min.js'></script>
+		<style>
+			html {
+				font-family: 'PT Sans', sans-serif;
+			}
+			h1 {
+				font-weight: 700;
+			}
+			b {
+				font-weight: 700
+			}
+			p {
+				margin-top: 7px;
+				margin-bottom: 7px;
+			}
+			#video {
+				max-width: calc(100vw - 640px);
+				width: calc(100vw - 640px);
+				min-width: 640px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			#container {
+				display: inline-block;
+			}
+			video {
+				max-width: calc(100vw - 640px);
+				width: calc(100vw - 640px);
+				min-width: 640px;
+			}
+			ul {
+				list-style: none;
+				width: calc(calc(100vw + 600px) - 100vw - 40px);
+				display: inline-block;
+			}
+			a {
+				color: #000;
+			}
+			.up_next{
+				display: inline-block;
+				cursor: pointer;
+			}
+			.recommend_thumbnail{
+				display:inline-block;
+			}
+			.recommend_details{
+				display:inline-block;
+				vertical-align: top;
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='container'>
+			<div id='video'>
+				<video controls autoplay id='player'></video>
+				<h1><%= details.title %></h1>
+				<p><b><%= details.viewCount %></b> views &bull; <%= details.uploadDate %> <span style='float: right;'><b><%= details.likes ? details.likes : 0 %></b> likes &bull; <b><%= details.dislikes ? details.dislikes : 0 %></b> dislikes</span></p>
+				<p>by <b><a href='/channel?q=<%= details.author.id %>'><%= details.ownerChannelName %></a></b></p>
+				<p><b><%= details.author.subscriber_count %></b> subscribers</p>
+				<p><%- details.description.replace(/[\n]/g, "<br>") %></p>
+				<label for='format'><b>Video Format:</b></label>
+				<select name='formats' id='format'>
+					<% formats.forEach(function(format){ %>
+						<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
+					<% }); %>
+				</select>
+			</div>
+			<ul>
+				<h2>Next Up:</h2>
+				<% recommendations.forEach(function(video){ %>
+					<%- `<li><div class='up_next'><img class='recommend_thumbnail' src="${video.thumbnails[0].url}" alt=""><div class='recommend_details'><a href='video?v=${video.id}'><b>${video.title}</b></a><p>${video.author.name} &bull; ${video.short_view_count_text} Views</p><p>Published ${video.published}</p></div></div></li>` %>
+				<% }); %>
+			</ul>
+		</div>
+		<script src='/js/quality.js'></script>
+		<script src='/js/play_time.js'></script>
+	</body>
+</html>

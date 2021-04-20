@@ -1,2 +1,2 @@
 # Hyzen
- A customizable frontend to YouTube
+A privacy respecting frontend to YouTube.
