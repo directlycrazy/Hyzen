@@ -1,5 +1,4 @@
-$(document).ready(() => {
-	$('#search_submit').click(() => {
-		window.location.href = '/search?q=' + $('#search').val();
-	});
+$('#search_form').submit((e) => {
+	e.preventDefault();
+	window.location.href = '/search?q=' + $('#search-field').val();
 })

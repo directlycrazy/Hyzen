@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
 	if (req.query.q) {
 		channels.getChannelInfo(req.query.q, 0).then(channel => {
-			console.log(channel);
 			return res.render('channel.ejs', {
 				query: req.query.q,
 				channel: channel

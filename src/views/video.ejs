@@ -1,41 +1,60 @@
-<html>
-	<head>
-		<title><%= details.title %> / Hyzen</title>
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-		<script src='/js/jquery.min.js'></script>
-		<link rel="stylesheet" href="/css/style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-	<body>
-		<div class='search_container'>
-			<input type="text" id='search' class='search' placeholder='Search'>
-			<button id='search_submit'>Submit</button>
-		</div>
-		<div id='container'>
-			<div id='video'>
-				<video controls autoplay id='player'></video>
-				<h1><%= details.title %></h1>
-				<p><b><%= details.viewCount %></b> views &bull; <%= details.uploadDate %> <span style='float: right;'><b><%= details.likes ? details.likes : 0 %></b> likes &bull; <b><%= details.dislikes ? details.dislikes : 0 %></b> dislikes</span></p>
-				<p>by <b><a href='/channel?q=<%= details.author.id %>'><%= details.ownerChannelName %></a></b></p>
-				<p><b><%= details.author.subscriber_count %></b> subscribers</p>
-				<p><%- details.description.replace(/[\n]/g, "<br>") %></p>
-				<label for='format'><b>Video Format:</b></label>
-				<select name='formats' id='format'>
-					<% formats.forEach(function(format){ %>
-						<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
-					<% }); %>
-				</select>
-			</div>
-			<ul>
-				<h2>Next Up:</h2>
-				<% recommendations.forEach(function(video){ %>
-					<%- `<li><div class='up_next'><img class='recommend_thumbnail' src="${video.thumbnails[0].url}" alt=""><div class='recommend_details'><a href='video?v=${video.id}'><b>${video.title}</b></a><p>${video.author.name} &bull; ${video.short_view_count_text} Views</p><p>Published ${video.published}</p></div></div></li>` %>
-				<% }); %>
-			</ul>
-		</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title><%= details.title %> / Hyzen</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Navigation-with-Search.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body style="font-family: 'PT Sans', sans-serif;">
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background: transparent;">
+        <div class="container"><a class="navbar-brand" href="#">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/trending">Trending</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/my/feed">Subscriptions</a></li>
+                </ul>
+                <form class="form-inline mr-auto" id='search_form' target="_self" autocomplete="off">
+                    <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
+                </form><a href="#" id='toggle_night_mode' style="margin-right: 10px;"><i class="fa fa-moon-o"></i></a><a class="btn btn-light action-button" role="button" href="#">Settings</a>
+            </div>
+        </div>
+    </nav>
+    <div style="display: inline-block;margin: 8px;">
+        <div style="display: inline-block;min-width: 640px;width: calc(100vw - 640px);max-width: calc(100vw - 640px);"><video controls autoplay id='player' style='max-width: calc(100vw - 640px); width: calc(100vw - 640px); min-width: 640px;'></video>
+            <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title %></strong><br></h1>
+            <p><strong><%= details.viewCount %></strong>&nbsp;views • <%= details.uploadDate %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
+            <p>by&nbsp;<a href="http://localhost:3000/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><br></p>
+            <p><strong><%= details.author.subscriber_count %></strong>&nbsp;subscribers<br></p>
+            <p><%- details.description.replace(/[\n]/g, "<br>") %></p>
+						<label for='format'><b>Video Format:</b></label>
+						<select name='formats' id='format'>
+							<% formats.forEach(function(format){ %>
+								<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
+							<% }); %>
+						</select>
+        </div>
+        <div style="vertical-align: top;list-style: none;display: inline-block;width: calc(calc(100vw + 600px) - 100vw - 40px);">
+            <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700;">Up Next:</h2>
+            <ul style="list-style: none;">
+								<% recommendations.forEach(function(video){ %>
+									<%- `<li><div style="display: inline-block; padding-bottom: 5px;"><img class="thumbnail_next" src="${video.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;">${video.author.name} &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
+								<% }); %>
+            </ul>
+        </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 		<script src='/js/quality.js'></script>
 		<script src='/js/play_time.js'></script>
 		<script src='/js/search.js'></script>
-	</body>
+        <script src='/js/theme.js'></script>
+</body>
+
 </html>
