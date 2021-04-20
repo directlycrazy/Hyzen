@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title><%= channel.author %> / Hyzen</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+		<script src='/js/jquery.min.js'></script>
+		<link rel="stylesheet" href="/css/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class='search_container'>
+			<input type="text" id='search' class='search' placeholder='Search'>
+			<button id='search_submit'>Submit</button>
+		</div>
+		<div>
+			<img id='channel_banner' src="<%= channel.authorBanners[0].url %>" alt="">
+			<h1><%= channel.author %></h1>
+			<p><%= channel.subscriberText %></p>
+			<p><%- channel.description.replace(/[\n]/g, "<br>") %></p>
+		</div>
+		<script src='/js/search.js'></script>
+	</body>
+</html>

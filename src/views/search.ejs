@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title><%= query %> / Hyzen</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+		<script src='/js/jquery.min.js'></script>
+		<link rel="stylesheet" href="/css/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class='search_container'>
+			<input type="text" id='search' class='search' placeholder='Search'>
+			<button id='search_submit'>Submit</button>
+		</div>
+		<ul>
+			<% Object.values(results).forEach(function(result){ %>
+				<% if (result.type === 'video'){ %>
+					<%- `<li><div class='up_next'><img class='recommend_thumbnail' src="${result.thumbnails[0].url}" alt=""><div class='recommend_details'><a href='video?v=${result.id}'><b>${result.title}</b></a><p>${result.author.name} &bull; ${result.views} Views</p><p>Published ${result.uploadedAt}</p></div></div></li>` %>
+				<% } %>
+			<% }); %>
+		</ul>
+		<script src='/js/search.js'></script>
+	</body>
+</html>
