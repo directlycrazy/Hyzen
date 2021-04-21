@@ -13,7 +13,7 @@
 
 <body style="font-family: 'PT Sans', sans-serif;">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background: transparent;">
-        <div class="container"><a class="navbar-brand" href="#">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand" href="/">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -21,7 +21,7 @@
                     <li class="nav-item"><a class="nav-link" href="/my/feed">Subscriptions</a></li>
                 </ul>
                 <form class="form-inline mr-auto" id='search_form' target="_self" autocomplete="off">
-                    <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
+                    <div class="form-group"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" value="<%= query %>" placeholder="Search" type="search" id="search-field" name="search"></div>
                 </form><a href="#" id='toggle_night_mode' style="margin-right: 10px;"><i class="fa fa-moon-o"></i></a><a class="btn btn-light action-button" role="button" href="#">Settings</a>
             </div>
         </div>
@@ -30,7 +30,7 @@
 			<ul style='list-style: none;'>
 				<% Object.values(results).forEach(function(result){ %>
 					<% if (result.type === 'video'){ %>
-						<%- `<li><div style="display: inline-block;"><img class="thumbnail_next" src="${result.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;">${result.author.name} &bull; ${result.views}<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
+						<%- `<li><div style="display: inline-block;"><img class="thumbnail_next" src="${result.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;">${result.author.name} &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
 					<% } %>
 				<% }); %>
 			</ul>
