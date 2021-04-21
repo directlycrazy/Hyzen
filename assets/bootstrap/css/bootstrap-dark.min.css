@@ -19,6 +19,10 @@
 	color: #fff !important;
 }
 
+.nav-link:active{
+	color: #fff !important;
+}
+
 input{
 	color: #fff !important;
 }

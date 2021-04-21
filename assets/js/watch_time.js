@@ -4,7 +4,7 @@ $('#player').ready(() => {
 	var d = date.getTime();
 	if (localStorage.getItem('watch_date')) {
 		if (!isNaN(localStorage.getItem('watch_date'))) {
-			if ((d - localStorage.getItem('watch_date')) >= 2678400) {
+			if ((d - localStorage.getItem('watch_date')) >= 2678400000) {
 				localStorage.removeItem('watch_history');
 				localStorage.setItem('watch_date', d);
 			}
