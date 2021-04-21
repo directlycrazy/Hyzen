@@ -16,18 +16,19 @@ $('#player').ready(() => {
 	}
 	const update = (id, value) => {
 		var a = localStorage.getItem('watch_history');
+		console.log(a);
 		if (!a) {
 			localStorage.setItem('watch_history', `{"${id}": ${value}}`);
-			return
 		} else {
-			var b = JSON.parse(a)
-			b[id] = value
-			localStorage.setItem('watch_history', JSON.stringify(b))
-			return
+			var b = JSON.parse(a);
+			b[id] = value;
+			localStorage.setItem('watch_history', JSON.stringify(b));
 		}
 	};
-	if (JSON.parse(localStorage.getItem('watch_history'))[query]) {
-		document.getElementById('player').currentTime = JSON.parse(localStorage.getItem('watch_history'))[query];
+	if (localStorage.getItem('watch_history')) {
+		if (JSON.parse(localStorage.getItem('watch_history'))[query]) {
+			document.getElementById('player').currentTime = JSON.parse(localStorage.getItem('watch_history'))[query];
+		}
 	}
 	setInterval(() => {
 		return update(query, document.getElementById('player').currentTime);
