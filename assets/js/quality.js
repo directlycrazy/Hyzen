@@ -13,7 +13,7 @@ $(document).ready(() => {
 		Array.from(b).forEach((a, i) => {
 			if (a.text === localStorage.getItem('preferred_quality')) {
 				document.getElementById('player').src = a.value;
-				$('#format').val(a.text);
+				$('#format').val(a.value);
 				return;
 			}
 			if ((i === b.length - 1) && !(document.getElementById('player').src)) {

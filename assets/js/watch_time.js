@@ -16,7 +16,6 @@ $('#player').ready(() => {
 	}
 	const update = (id, value) => {
 		var a = localStorage.getItem('watch_history');
-		console.log(a);
 		if (!a) {
 			localStorage.setItem('watch_history', `{"${id}": ${value}}`);
 		} else {
