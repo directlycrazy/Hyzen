@@ -33,28 +33,28 @@
             <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><br></p>
             <p><strong><%= details.author.subscriber_count %></strong>&nbsp;subscribers<br></p>
             <p><%- details.description.replace(/[\n]/g, "<br>") %></p>
-						<label for='format'><b>Video Quality:</b></label>
-						<select name='formats' id='format'>
-							<% formats.forEach(function(format){ %>
-								<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
-							<% }); %>
-						</select>
+			<label for='format'><b>Video Quality:</b></label>
+		    <select name='formats' id='format'>
+			    <% formats.forEach(function(format){ %>
+					<%- (format.qualityLabel !== null && format.audioBitrate !== null) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
+			    <% }); %>
+		    </select>
         </div>
         <div style="vertical-align: top;list-style: none;display: inline-block;width: calc(calc(100vw + 600px) - 100vw - 40px);">
             <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700;">Up Next:</h2>
             <ul style="list-style: none;">
-								<% recommendations.forEach(function(video){ %>
-									<%- `<li><div style="display: inline-block; padding-bottom: 5px;"><img class="thumbnail_next" src="${video.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;">${video.author.name} &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
-								<% }); %>
+			    <% recommendations.forEach(function(video){ %>
+				    <%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="${video.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${video.author.id}'>${video.author.name}</a> &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
+				<% }); %>
             </ul>
         </div>
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-		<script src='/js/quality.js'></script>
-		<script src='/js/watch_time.js'></script>
-		<script src='/js/search.js'></script>
-        <script src='/js/theme.js'></script>
+	<script src='/js/quality.js'></script>
+	<script src='/js/watch_time.js'></script>
+	<script src='/js/search.js'></script>
+    <script src='/js/theme.js'></script>
 </body>
 
 </html>

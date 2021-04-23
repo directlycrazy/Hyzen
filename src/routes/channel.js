@@ -1,16 +1,21 @@
 const express = require('express');
 const channels = require('yt-channel-info');
+const search = require('ytsr');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
 	if (req.query.q) {
-		channels.getChannelInfo(req.query.q, 0).then(channel => {
+		channels.getChannelInfo(req.query.q, 0).then(async channel => {
+			let videos = await search(channel.author, { pages: 1 });
+			console.log(videos);
 			return res.render('channel.ejs', {
 				query: req.query.q,
-				channel: channel
-			})
+				channel: channel,
+				videos: videos.items
+			});
 		}).catch(e => {
+			console.error(e);
 			return res.sendStatus(404);
 		});
 	} else {

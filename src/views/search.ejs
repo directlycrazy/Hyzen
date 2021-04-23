@@ -30,15 +30,18 @@
 			<ul style='list-style: none;'>
 				<% Object.values(results).forEach(function(result){ %>
 					<% if (result.type === 'video'){ %>
-						<%- `<li><div style="display: inline-block;"><img class="thumbnail_next" src="${result.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;">${result.author.name} &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
+						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="${result.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.author.channelID}'>${result.author.name}</a> &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
+					<% } %>
+                    <% if (result.type === 'channel'){ %>
+						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="${result.avatars[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="channel?q=${result.channelID}"><strong>${result.name}<br></strong></a><p>${result.subscribers}<br></p></div></div></li>` %>
 					<% } %>
 				<% }); %>
 			</ul>
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-		<script src='/js/search.js'></script>
-		<script src='/js/theme.js'></script>
+	<script src='/js/search.js'></script>
+    <script src='/js/theme.js'></script>
 </body>
 
 </html>
