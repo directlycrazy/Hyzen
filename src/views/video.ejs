@@ -44,7 +44,7 @@
             <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700;">Up Next:</h2>
             <ul style="list-style: none;">
 			    <% recommendations.forEach(function(video){ %>
-				    <%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="${video.thumbnails[0].url}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${video.author.id}'>${video.author.name}</a> &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
+				    <%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${video.thumbnails[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${video.author.id}'>${video.author.name}</a> &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
 				<% }); %>
             </ul>
         </div>
