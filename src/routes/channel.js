@@ -7,8 +7,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	if (req.query.q) {
 		channels.getChannelInfo(req.query.q, 0).then(async channel => {
-			let videos = await search(channel.author, { pages: 1 });
-			console.log(videos);
+			let videos = await search(channel.author, { pages: 2 });
 			return res.render('channel.ejs', {
 				query: req.query.q,
 				channel: channel,
