@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 				videos: videos.items
 			});
 		}).catch(e => {
-			console.error(e);
 			return res.sendStatus(404);
 		});
 	} else {

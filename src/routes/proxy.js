@@ -22,7 +22,6 @@ router.get('/thumbnail', async (req, res) => {
 				end: true	
 			});
 		} catch (e) {
-			console.log(e)
 			return res.sendStatus(400)
 		}
 	} else {

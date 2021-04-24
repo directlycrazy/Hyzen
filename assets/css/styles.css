@@ -3,3 +3,10 @@
   max-height: 94.27px;
   display: inline-block;
 }
+.thumbnail_parent {
+  max-width: 168px;
+  max-height: 94.27px;
+  display: inline-block;
+  text-align:center;
+  position: relative;
+}

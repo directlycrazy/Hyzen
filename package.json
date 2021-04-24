@@ -22,6 +22,7 @@
     "path": "^0.12.7",
     "url": "^0.11.0",
     "yt-channel-info": "^2.1.0",
+    "yt-comment-scraper": "^4.0.1",
     "ytdl-core": "^4.5.0",
     "ytsr": "^3.4.1"
   }
