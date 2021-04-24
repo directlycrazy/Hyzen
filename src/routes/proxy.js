@@ -6,23 +6,32 @@ const router = express.Router();
 
 router.get('/thumbnail', async (req, res) => {
 	if (req.query.q) {
-		try {
-			var parts = url.parse(req.query.q);
-			var proxy = https.request({
-				hostname: parts.hostname,
-				path: parts.path
-			}, function (response) {
-				res.writeHead(response.statusCode, response.headers)	
-				response.pipe(res, {
+		var parts = url.parse(req.query.q);
+		if (parts.hostname === 'yt3.ggpht.com' || parts.hostname === 'i.ytimg.com') {
+			try {
+				var proxy = https.request({
+					hostname: parts.hostname,
+					path: parts.path
+				}, function (response) {
+					res.writeHead(response.statusCode, response.headers);
+					response.pipe(res, {
+						end: true
+					});
+				});
+				req.pipe(proxy, {
 					end: true
 				});
+			} catch (e) {
+				return res.render('error.ejs', {
+					error_code: 501,
+					error: e
+				});
+			}
+		} else {
+			return res.render('error.ejs', {
+				error_code: 400,
+				error: 'Hostname does not match valid thumbnail domains.'
 			});
-		
-			req.pipe(proxy, {
-				end: true	
-			});
-		} catch (e) {
-			return res.sendStatus(400)
 		}
 	} else {
 		return res.redirect('/');

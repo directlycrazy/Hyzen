@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const ytdl = require('ytdl-core');
 const url = require('url')
 const https = require('https')
@@ -28,4 +28,4 @@ router.get('/', async (req, res) => {
 	}
 });
 
-module.exports = router;
+module.exports = router;*/

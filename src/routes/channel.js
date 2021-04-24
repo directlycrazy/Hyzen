@@ -7,14 +7,24 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	if (req.query.q) {
 		channels.getChannelInfo(req.query.q, 0).then(async channel => {
-			let videos = await search(channel.author, { pages: 2 });
-			return res.render('channel.ejs', {
-				query: req.query.q,
-				channel: channel,
-				videos: videos.items
-			});
+			try {
+				let videos = await search(channel.author, { pages: 2 });
+				return res.render('channel.ejs', {
+					query: req.query.q,
+					channel: channel,
+					videos: videos.items
+				});
+			} catch (e) {
+				return res.render('error.ejs', {
+					error_code: 501,
+					error: e
+				});
+			}
 		}).catch(e => {
-			return res.sendStatus(404);
+			return res.render('error.ejs', {
+				error_code: 404,
+				error: e
+			});
 		});
 	} else {
 		return res.redirect('/');
