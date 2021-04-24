@@ -38,4 +38,36 @@ router.get('/thumbnail', async (req, res) => {
 	}
 });
 
+router.get('/video', (req, res) => {
+	if (req.query.q) {
+		var parts = url.parse(req.query.q);
+		try {
+			if (parts.hostname.split('.')[parts.hostname.split('.').length - 2] + '.' + parts.hostname.split('.')[parts.hostname.split('.').length - 1] === 'googlevideo.com') {
+				try {
+					var externalReq = https.request({
+						hostname: parts.hostname,
+						path: parts.path.replace('QUERY', '?')
+					}, function (externalRes) {
+						res.writeHead(200, externalRes.headers);
+						externalRes.pipe(res);
+					});
+					externalReq.end();
+				} catch (e) {
+					return res.render('error.ejs', {
+						error_code: 501,
+						error: e
+					});
+				}
+			}
+		} catch (e) {
+			return res.render('error.ejs', {
+				error_code: 501,
+				error: e
+			});
+		}
+	} else {
+		return res.redirect('/');
+	}
+});
+
 module.exports = router;

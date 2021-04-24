@@ -39,6 +39,9 @@
 					<%- (format.hasVideo === true && format.hasAudio === true) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
 			    <% }); %>
 		    </select>
+            <br />
+            <label for="proxy"><b>Proxy Video:</b></label>
+            <input name='proxy' id='proxy' type="checkbox">
         </div>
         <div style="vertical-align: top;list-style: none;display: inline-block;width: calc(calc(100vw + 600px) - 100vw - 40px);">
             <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700;">Up Next:</h2>
@@ -56,6 +59,7 @@
 	<script src='/js/search.js'></script>
     <script src='/js/theme.js'></script>
     <script src='/js/watched.js'></script>
+    <script src='/js/proxy.js'></script>
 </body>
 
 </html>
