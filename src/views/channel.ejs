@@ -35,10 +35,10 @@
         </div>
         <div style="list-style: none;">
             <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700; margin-top: 40px;">Videos</h2>
-            <ul style="list-style: none;">
+            <ul id='recommendations' style="list-style: none;">
 							<% Object.values(videos).forEach(function(result){ %>
 								<% if (result.type === 'video' && result.author.name === channel.author){ %>
-									<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${result.thumbnails[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.author.channelID}'>${result.author.name}</a> &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
+									<%- `<li id='recommendation_${result.id}'><div style="display: inline-block; margin-bottom: 16px;"><div class='thumbnail_parent' id='thumbnail_parent_${result.id}'><img class="thumbnail_next" id='thumbnail_${result.id}' src="/proxy/thumbnail?q=${result.thumbnails[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"></div><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.author.channelID}'>${result.author.name}</a> &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
 								<% } %>
 							<% }); %>
             </ul>
@@ -46,8 +46,9 @@
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-		<script src='/js/search.js'></script>
+	<script src='/js/search.js'></script>
     <script src='/js/theme.js'></script>
+    <script src='/js/watched.js'></script>
 </body>
 
 </html>
