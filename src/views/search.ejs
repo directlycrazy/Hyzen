@@ -33,7 +33,7 @@
 						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${result.thumbnails[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.author.channelID}'>${result.author.name}</a> &bull; ${result.views} views<br></p><p>${result.uploadedAt}<br></p></div></div></li>` %>
 					<% } %>
                     <% if (result.type === 'channel'){ %>
-						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${result.avatars[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="channel?q=${result.channelID}"><strong>${result.name}<br></strong></a><p>${result.subscribers}<br></p></div></div></li>` %>
+						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${result.avatars[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: middle;display: inline-block;max-width: 380px;"><a href="channel?q=${result.channelID}"><strong>${result.name}<br></strong></a><p>${result.subscribers}<br></p></div></div></li>` %>
 					<% } %>
 				<% }); %>
 			</ul>
