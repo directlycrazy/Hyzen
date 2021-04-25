@@ -1,4 +1,4 @@
-$('#player').ready(() => {
+document.getElementById('player').onloadedmetadata = () => {
 	var query = new URLSearchParams(window.location.search).get('v');
 	var date = new Date();
 	var d = date.getTime();
@@ -26,10 +26,14 @@ $('#player').ready(() => {
 	};
 	if (localStorage.getItem('watch_history')) {
 		if (JSON.parse(localStorage.getItem('watch_history'))[query]) {
-			document.getElementById('player').currentTime = JSON.parse(localStorage.getItem('watch_history'))[query];
+			if (JSON.parse(localStorage.getItem('watch_history'))[query] >= document.getElementById('player').duration - 10) {
+				document.getElementById('player').currentTime = 0;
+			} else {
+				document.getElementById('player').currentTime = JSON.parse(localStorage.getItem('watch_history'))[query];
+			}
 		}
 	}
 	setInterval(() => {
 		return update(query, document.getElementById('player').currentTime);
 	}, 5000);
-})
+}
