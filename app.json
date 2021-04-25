@@ -1,0 +1,7 @@
+{
+  "name": "Hyzen",
+  "description": "A privacy respecting frontend to YouTube.",
+  "repository": "https://github.com/directlycrazy/Hyzen",
+  "logo": "https://github.com/directlycrazy/Hyzen/blob/main/assets/favicon.ico",
+  "stack": "heroku-20"
+}
