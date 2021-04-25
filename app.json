@@ -2,6 +2,6 @@
   "name": "Hyzen",
   "description": "A privacy respecting frontend to YouTube.",
   "repository": "https://github.com/directlycrazy/Hyzen",
-  "logo": "https://raw.githubusercontent.com/directlycrazy/hyzen/master/assets/img/logo.png",
+  "logo": "https://raw.githubusercontent.com/directlycrazy/hyzen/main/assets/img/logo.png",
   "stack": "heroku-20"
 }
