@@ -1,7 +1,7 @@
 # Hyzen
 A privacy respecting frontend to YouTube.
 
-![Travis CI Build](https://api.travis-ci.com/directlycrazy/Hyzen.svg)
+[![Travis CI Build](https://api.travis-ci.com/directlycrazy/Hyzen.svg)](https://travis-ci.com/github/directlycrazy/Hyzen)
 
 # Features
 * Dark Mode
