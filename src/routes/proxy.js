@@ -23,13 +23,11 @@ router.get('/thumbnail', async (req, res) => {
 				});
 			} catch (e) {
 				return res.render('error.ejs', {
-					error_code: 501,
 					error: e
 				});
 			}
 		} else {
 			return res.render('error.ejs', {
-				error_code: 400,
 				error: 'Hostname does not match valid thumbnail domains.'
 			});
 		}
@@ -54,14 +52,12 @@ router.get('/video', (req, res) => {
 					externalReq.end();
 				} catch (e) {
 					return res.render('error.ejs', {
-						error_code: 501,
 						error: e
 					});
 				}
 			}
 		} catch (e) {
 			return res.render('error.ejs', {
-				error_code: 501,
 				error: e
 			});
 		}

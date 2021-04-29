@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
 				var info = await ytdl.getInfo(req.query.v);
 				if (info.formats.length === 0){
 					return res.render('error.ejs', {
-						error_code: 501,
 						error: 'Could not find any media sources for this video. It may be blocked in the server\'s country.'
 					});
 				}
@@ -21,13 +20,11 @@ router.get('/', async (req, res) => {
 				});
 			} catch (e) {
 				return res.render('error.ejs', {
-					error_code: 501,
 					error: e
 				});
 			}
 		} else {
 			return res.render('error.ejs', {
-				error_code: 404,
 				error: 'Video not found.'
 			});
 		}

@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
 			});
 		} catch (e) {
 			return res.render('error.ejs', {
-				error_code: 501,
 				error: e
 			});
 		}
