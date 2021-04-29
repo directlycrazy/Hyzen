@@ -28,13 +28,13 @@
     </nav>
     <div style="margin: 8px;text-align:center;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
         <h1 style='font-weight: 700;'>Something went wrong!</h1>
-				<h5>Error Code: <b><%= error_code %></b></h5>
+				<h5>Error Code: <b><%= error_code ? error_code : "Unknown" %></b></h5>
 				<p>Error Message:</p>
-				<code><%= error %></code>
+				<code><%= error ? error : "None" %></code>
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-		<script src='/js/search.js'></script>
+	<script src='/js/search.js'></script>
     <script src='/js/theme.js'></script>
 </body>
 

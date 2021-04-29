@@ -28,10 +28,10 @@
     </nav>
     <div style="display: inline-block;margin: 8px;">
         <div style="display: inline-block;min-width: 640px;width: calc(100vw - 640px);max-width: calc(100vw - 640px);"><video controls autoplay id='player' style='max-width: calc(100vw - 640px); width: calc(100vw - 640px); min-width: 640px; min-height: 360px; max-height: calc(((100vw - 640px) / 16) * 9);'></video>
-            <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title %></strong><br></h1>
-            <p><strong><%= details.viewCount %></strong>&nbsp;views • <%= details.uploadDate %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
+            <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title ? details.title : "" %></strong><br></h1>
+            <p><strong><%= details.viewCount ? details.viewCount : "0" %></strong>&nbsp;views • <%= details.uploadDate ? details.uploadDate : "Unknown" %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
             <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><br></p>
-            <p><strong><%= details.author.subscriber_count %></strong>&nbsp;subscribers<br></p>
+            <p><strong><%= details.author.subscriber_count ? details.author.subscriber_count : "Hidden" %></strong>&nbsp;subscribers<br></p>
             <p><%- details.description ? details.description.replace(/[\n]/g, "<br>") : "" %></p>
 			<label for='format'><b>Video Quality:</b></label>
 		    <select name='formats' id='format'>
