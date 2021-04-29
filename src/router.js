@@ -12,7 +12,7 @@ fs.readdir(__dirname + '/routes', (err, files) => {
 		if (index + 1 === files.length) {
 			router.use(express.static('assets'));
 			router.get('/', (req, res) => {
-				res.redirect('/my/feed');
+				res.redirect('/my/');
 			});
 			router.get('*', (req, res) => {
 				res.sendStatus(404);
