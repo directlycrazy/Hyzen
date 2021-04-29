@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/css/Navigation-with-Search.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <meta name="theme-color" content="#FEFEFE">
+    <meta property="og:site_name" content="Hyzen">
+    <meta name="twitter:card" content="player" />
+    <meta name="twitter:site" content="Hyzen" />
+    <meta property="og:title" content="<%= details.title %> / Hyzen" />
+    <meta property="og:description" content="<%= details.description ? details.description : '' %>">
+    <meta property="og:video" content="<%= formats[0].url %>" />
+    <meta property="og:video:secure_url" content="<%= formats[0].url %>" />
+    <meta property="og:video:type" content="video/mp4" />
+    <meta property="og:video:width" content="640" />
+    <meta property="og:video:height" content="360" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="<%= details.thumbnails[0].url %>" />
+    <meta name="twitter:player" content="<%= formats[0].url %>" />
+    <meta name="twitter:player:width" content="640" />
+    <meta name="twitter:player:height" content="360" />
+    <meta name="twitter:player:stream" content="<%= formats[0].url %>" />
+    <meta name="twitter:player:stream:content_type" content="video/mp4" />
 </head>
 
 <body style="font-family: 'PT Sans', sans-serif;">
