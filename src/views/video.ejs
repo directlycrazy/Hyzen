@@ -46,7 +46,7 @@
         <div style="display: inline-block;min-width: 640px;width: calc(100vw - 640px);max-width: calc(100vw - 640px);"><video controls autoplay id='player' style='max-width: calc(100vw - 640px); width: calc(100vw - 640px); min-width: 640px; min-height: 360px; max-height: calc(((100vw - 640px) / 16) * 9);'></video>
             <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title ? details.title : "" %></strong><br></h1>
             <p><strong><%= details.viewCount ? details.viewCount : "0" %></strong>&nbsp;views • <%= details.uploadDate ? details.uploadDate : "Unknown" %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
-            <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><br></p>
+            <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><span style="float: right;"><strong><a class='btn btn-light' id='subscribe'>Subscribe</a></strong><br></span><br></p>
             <p><strong><%= details.author.subscriber_count ? details.author.subscriber_count : "Hidden" %></strong>&nbsp;subscribers<br></p>
             <p><%- details.description ? details.description.replace(/[\n]/g, "<br>") : "" %></p>
 			<label for='format'><b>Video Quality:</b></label>
@@ -71,6 +71,7 @@
             </ul>
         </div>
     </div>
+    <div style='display:none;position:fixed;' id='creator_data'><%= details.author.id %></div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 	<script src='/js/quality.js'></script>
@@ -80,6 +81,7 @@
     <script src='/js/watched.js'></script>
     <script src='/js/proxy.js'></script>
     <script src='/js/autoplay.js'></script>
+    <script src='/js/subscribe.js'></script>
 </body>
 
 </html>
