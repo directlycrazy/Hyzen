@@ -12,10 +12,21 @@ fs.readdir(__dirname + '/routes', (err, files) => {
 		if (index + 1 === files.length) {
 			router.use(express.static('assets'));
 			router.get('/', (req, res) => {
-				res.redirect('/my/');
+				return res.redirect('/my/');
+			});
+			router.get('/:id', (req, res) => {
+				if (req.params.id.length === 11) {
+					return res.redirect('/video?v=' + req.params.id);
+				} else {
+					return res.render('error.ejs', {
+						error: 'Video not Found.'
+					});
+				}
 			});
 			router.get('*', (req, res) => {
-				res.sendStatus(404);
+				return res.render('error.ejs', {
+					error: 'Page not Found.'
+				});
 			});
 		}
 	});

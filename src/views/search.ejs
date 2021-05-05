@@ -16,7 +16,7 @@
     <meta property="og:title" content="<%= query %> / Hyzen" />
 </head>
 
-<body style="font-family: 'PT Sans', sans-serif;">
+<body style="font-family: 'PT Sans', sans-serif; overflow-x: hidden;">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background: transparent;">
         <div class="container"><a class="navbar-brand" href="/">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -29,17 +29,15 @@
             </div>
         </div>
     </nav>
-    <div style="display: inline-block;margin: 8px;">
-			<ul style='list-style: none;' id='recommendations'>
-				<% Object.values(results).forEach(function(result){ %>
-					<% if (result.type === 'video'){ %>
-						<%- `<li id='recommendation_${result.id}'><div style="display: inline-block; margin-bottom: 16px;"><div class='thumbnail_parent' id='thumbnail_parent_${result.id}'><img id='thumbnail_${result.id}' class="thumbnail_next" src="/proxy/thumbnail?q=${result.thumbnails ? result.thumbnails[0].url.replace('hqdefault', 'mqdefault') : ''}" style="display: inline-block;"></div><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="video?v=${result.id}"><strong>${result.title ? result.title : ""}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.author.channelID}'>${result.author.name ? result.author.name : ""}</a> &bull; ${result.views ? result.views : "0"} views<br></p><p>${result.uploadedAt ? result.uploadedAt : "Unknown"}<br></p></div></div></li>` %>
-					<% } %>
-                    <% if (result.type === 'channel'){ %>
-						<%- `<li><div style="display: inline-block; margin-bottom: 16px;"><img class="thumbnail_next" src="/proxy/thumbnail?q=${result.avatars ? result.avatars[0].url.replace('hqdefault', 'mqdefault') : ''}" style="display: inline-block;"><div style="padding-left: 10px;vertical-align: middle;display: inline-block;max-width: 380px;"><a href="channel?q=${result.channelID}"><strong>${result.name ? result.name : ""}<br></strong></a><p>${result.subscribers ? result.subscribers : "Unknown subscribers"}<br></p></div></div></li>` %>
-					<% } %>
-				<% }); %>
-			</ul>
+    <div class='container' id='recommendations' style='margin-top: 20px;'>
+        <% Object.values(results).forEach(function(result){ %>
+            <% if (result.type === 'video'){ %>
+                <%- `<div class="row" id='recommendation_${result.id}'><div class="col-sm-2" style="min-width:178px"><div id="thumbnail_parent_${result.id}"><img style="width:100%;min-width:168px" id="${result.id}" src="/proxy/thumbnail?q=${result.thumbnails ? result.thumbnails[0].url.replace('hqdefault', 'mqdefault') : ''}" alt=""><br></div></div><div class="col"><div style="width:100%"><a href="/video?v=${result.id}"><strong>${result.title ? result.title : ""}</strong><br></a><p><a href="/channel?q=${result.author.channelID}">${result.author.name ? result.author.name : ""}</a> &bull; ${result.views ? result.views : "0"} views<br></p><p>${result.uploadedAt ? result.uploadedAt : "Unknown"}<br></p></div></div></div>` %>
+            <% } %>
+            <% if (result.type === 'channel'){ %>
+                <%- `<div class="row"><div class="col-sm-2" style="min-width:178px"><div id="thumbnail_parent_${result.videoId}"><img style="width:100%;min-width:168px" id="${result.videoId}" src="/proxy/thumbnail?q=${result.avatars ? result.avatars[0].url.replace('hqdefault', 'mqdefault') : ''}" alt=""><br></div></div><div class="col"><div style="width:100%"><a href="/channel?q=${result.channelID}"><strong>${result.name ? result.name : ""}</strong><br></a><p>${result.subscribers ? result.subscribers : "Unknown subscribers"}<br></p></div></div></div>` %>
+            <% } %>
+        <% }); %>
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

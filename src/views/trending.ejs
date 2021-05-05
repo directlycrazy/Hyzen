@@ -16,7 +16,7 @@
     <meta property="og:title" content="Trending / Hyzen" />
 </head>
 
-<body style="font-family: 'PT Sans', sans-serif;">
+<body style="font-family: 'PT Sans', sans-serif; overflow-x: hidden;">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background: transparent;">
         <div class="container"><a class="navbar-brand" href="/">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -29,16 +29,14 @@
             </div>
         </div>
     </nav>
-    <div style="display: inline-block;margin: 8px;">
-        <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;margin-left:40px;"><strong>Trending</strong><br></h1>
-			<ul style='list-style: none;' id='recommendations'>
+    <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;margin-left:40px;text-align:center;width:calc(100vw - 16px);margin:0;"><strong>Trending</strong><br></h1>
+			<div class='container' id='recommendations' style='margin-top: 20px;'>
 				<% Object.values(results).forEach(function(result){ %>
 					<% if (result.type === 'video'){ %>
-						<%- `<li id='recommendation_${result.videoId}'><div style="display: inline-block; margin-bottom: 16px;"><div class='thumbnail_parent' id='thumbnail_parent_${result.videoId}'><img id='thumbnail_${result.videoId}' class="thumbnail_next" src="/proxy/thumbnail?q=${result.videoThumbnails ? result.videoThumbnails[1].url.replace('hqdefault', 'mqdefault') : ''}" style="display: inline-block;"></div><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 380px;"><a href="/video?v=${result.videoId}"><strong>${result.title ? result.title : ""}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${result.authorId}'>${result.author ? result.author : ""}</a> &bull; ${result.viewCount ? result.viewCount : "0"} views<br></p><p>${result.publishedText ? result.publishedText : "Unknown"}<br></p></div></div></li>` %>
+						<%- `<div class="row" id='recommendation_${result.videoId}'><div class="col-sm-2" style="min-width:178px"><div id="thumbnail_parent_${result.videoId}"><img style="width:100%;min-width:168px" id="${result.videoId}" src="/proxy/thumbnail?q=${result.videoThumbnails ? result.videoThumbnails[1].url.replace('hqdefault', 'mqdefault') : ''}" alt=""><br></div></div><div class="col"><div style="width:100%"><a href="/video?v=${result.videoId}"><strong>${result.title ? result.title : ""}</strong><br></a><p><a href="/channel?q=${result.authorId}">${result.author ? result.author : ""}</a> &bull; ${result.viewCount ? result.viewCount : "0"} views<br></p><p>${result.publishedText ? result.publishedText : "Unknown"}<br></p></div></div></div>` %>
 					<% } %>
 				<% }); %>
-			</ul>
-    </div>
+            </div>
     <script src="/js/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 	<script src='/js/search.js'></script>

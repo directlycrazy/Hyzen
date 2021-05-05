@@ -29,7 +29,7 @@
     <meta name="twitter:player:stream:content_type" content="video/mp4" />
 </head>
 
-<body style="font-family: 'PT Sans', sans-serif;">
+<body style="font-family: 'PT Sans', sans-serif; overflow-x: hidden;">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background: transparent;">
         <div class="container"><a class="navbar-brand" href="/">Hyzen</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -42,33 +42,36 @@
             </div>
         </div>
     </nav>
-    <div style="display: inline-block;margin: 8px;">
-        <div style="display: inline-block;min-width: 640px;width: calc(100vw - 640px);max-width: calc(100vw - 640px);"><video controls autoplay id='player' style='max-width: calc(100vw - 640px); width: calc(100vw - 640px); min-width: 640px; min-height: 360px; max-height: calc(((100vw - 640px) / 16) * 9);'></video>
-            <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title ? details.title : "" %></strong><br></h1>
-            <p><strong><%= details.viewCount ? details.viewCount : "0" %></strong>&nbsp;views • <%= details.uploadDate ? details.uploadDate : "Unknown" %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
-            <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><span style="float: right;"><strong><a class='btn btn-light' id='subscribe'>Subscribe</a></strong><br></span><br></p>
-            <p><strong><%= details.author.subscriber_count ? details.author.subscriber_count : "Hidden" %></strong>&nbsp;subscribers<br></p>
-            <p><%- details.description ? details.description.replace(/[\n]/g, "<br>") : "" %></p>
-			<label for='format'><b>Video Quality:</b></label>
-		    <select name='formats' id='format'>
-			    <% formats.forEach(function(format){ %>
-					<%- (format.hasVideo === true && format.hasAudio === true) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
-			    <% }); %>
-		    </select>
-            <br />
-            <label for="proxy"><b>Proxy Video:</b></label>
-            <input name='proxy' id='proxy' type="checkbox">
-            <br />
-            <label for="autoplay"><b>Autoplay:</b></label>
-            <input name='autoplay' id='autoplay' type="checkbox">
-        </div>
-        <div style="vertical-align: top;list-style: none;display: inline-block;width: calc(calc(100vw + 600px) - 100vw - 40px);">
-            <h2 style="margin-left: 40px;font-size: 24px;font-weight: 700;" id='autoplaying'>Up Next:</h2>
-            <ul style="list-style: none;" id='recommendations'>
-			    <% recommendations.forEach(function(video){ %>
-				    <%- `<li id='recommendation_${video.id}'><div style="display: inline-block; margin-bottom: 16px;"><div class='thumbnail_parent' id='thumbnail_parent_${video.id}'><img class="thumbnail_next" id='thumbnail_${video.id}' src="/proxy/thumbnail?q=${video.thumbnails[0].url.replace('hqdefault', 'mqdefault')}" style="display: inline-block;"></div><div style="padding-left: 10px;vertical-align: top;display: inline-block;max-width: 320px;"><a href="video?v=${video.id}"><strong>${video.title}<br></strong></a><p style="margin-bottom: 0;"><a href='/channel?q=${video.author.id}'>${video.author.name}</a> &bull; ${video.short_view_count_text} views<br></p><p>${video.published}<br></p></div></div></li>` %>
-				<% }); %>
-            </ul>
+    <div style='margin: 8px;'>
+        <div class="row">
+            <div class="col-lg-8">
+                <video controls autoplay id='player' style='width:100%; max-height: calc(((100%) / 16) * 9);'></video>
+                <h1 style="font-family: 'PT Sans', sans-serif;margin-top: 21.440px;margin-bottom: 21.440px;font-size: 32px;font-weight: 700;"><strong><%= details.title ? details.title : "" %></strong><br></h1>
+                <p><strong><%= details.viewCount ? details.viewCount : "0" %></strong>&nbsp;views • <%= details.uploadDate ? details.uploadDate : "Unknown" %><span style="float: right;"><strong><%= details.likes ? details.likes : 0 %></strong>&nbsp;likes •&nbsp;<strong><%= details.dislikes ? details.dislikes : 0 %></strong>&nbsp;dislikes<br></span><br></p>
+                <p>by&nbsp;<a href="/channel?q=<%= details.author.id %>"><strong><%= details.ownerChannelName %></strong></a><span style="float: right;"><strong><a class='btn btn-light' id='subscribe'>Subscribe</a></strong><br></span><br></p>
+                <p><strong><%= details.author.subscriber_count ? details.author.subscriber_count : "Hidden" %></strong>&nbsp;subscribers<br></p>
+                <p><%- details.description ? details.description.replace(/[\n]/g, "<br>") : "" %></p>
+                <label for='format'><b>Video Quality:</b></label>
+                <select name='formats' id='format'>
+                    <% formats.forEach(function(format){ %>
+                        <%- (format.hasVideo === true && format.hasAudio === true) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
+                    <% }); %>
+                </select>
+                <br />
+                <label for="proxy"><b>Proxy Video:</b></label>
+                <input name='proxy' id='proxy' type="checkbox">
+                <br />
+                <label for="autoplay"><b>Autoplay:</b></label>
+                <input name='autoplay' id='autoplay' type="checkbox">
+            </div>
+            <div class="col-lg-4">
+                <h2 style="font-size: 24px;font-weight: 700;" id='autoplaying'>Up Next:</h2>
+                <div id='recommendations' style='margin-top: 20px;'>
+                    <% recommendations.forEach(function(video){ %>
+                        <%- `<div class="row" id='recommendation_${video.id}'><div class="col-sm-2" style="min-width:178px"><div id="thumbnail_parent_${video.id}"><img style="width:100%;min-width:168px" id="${video.id}" src="/proxy/thumbnail?q=${video.thumbnails ? video.thumbnails[0].url.replace('hqdefault', 'mqdefault') : ''}" alt=""><br></div></div><div class="col"><div style="width:100% vertical-align: top;"><a href="/video?v=${video.id}"><strong>${video.title ? video.title : ""}</strong><br></a><p><a href="/channel?q=${video.author.id}">${video.author.name ? video.author.name : ""}</a> &bull; ${video.short_view_count_text ? video.short_view_count_text : "0"} views<br></p><p>${video.published ? video.published : "Unknown"}<br></p></div></div></div>` %>
+                    <% }); %>
+                </div>
+            </div>
         </div>
     </div>
     <div style='display:none;position:fixed;' id='creator_data'><%= details.author.id %></div>

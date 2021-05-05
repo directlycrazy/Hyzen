@@ -1,6 +1,6 @@
 const express = require('express');
 const url = require('url');
-const https = require('https');
+const axios = require('axios');
 
 const router = express.Router();
 
@@ -9,17 +9,15 @@ router.get('/thumbnail', async (req, res) => {
 		var parts = url.parse(req.query.q);
 		if (parts.hostname === 'yt3.ggpht.com' || parts.hostname === 'i.ytimg.com') {
 			try {
-				var proxy = https.request({
-					hostname: parts.hostname,
-					path: parts.path
-				}, function (response) {
-					res.writeHead(response.statusCode, response.headers);
-					response.pipe(res, {
-						end: true
+				axios.get(req.query.q, {
+					responseType: 'stream'
+				}).then((stream) => {
+					res.writeHead(stream.status, stream.headers);
+					stream.data.pipe(res);
+				}).catch(e => {
+					return res.render('error.ejs', {
+						error: e
 					});
-				});
-				req.pipe(proxy, {
-					end: true
 				});
 			} catch (e) {
 				return res.render('error.ejs', {
@@ -42,14 +40,16 @@ router.get('/video', (req, res) => {
 		try {
 			if (parts.hostname.split('.')[parts.hostname.split('.').length - 2] + '.' + parts.hostname.split('.')[parts.hostname.split('.').length - 1] === 'googlevideo.com') {
 				try {
-					var externalReq = https.request({
-						hostname: parts.hostname,
-						path: parts.path.replace('QUERY', '?')
-					}, function (externalRes) {
-						res.writeHead(200, externalRes.headers);
-						externalRes.pipe(res);
+					axios.get(req.query.q.replace('QUERY', '?'), {
+						responseType: 'stream'
+					}).then((stream) => {
+						res.writeHead(stream.status, stream.headers);
+						stream.data.pipe(res);
+					}).catch(e => {
+						return res.render('error.ejs', {
+							error: e
+						});
 					});
-					externalReq.end();
 				} catch (e) {
 					return res.render('error.ejs', {
 						error: e
