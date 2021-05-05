@@ -1,8 +1,9 @@
 const express = require('express');
-const path = require('path');
+const compression = require('compression');
 
 const app = express();
 
+app.use(compression())
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 app.use(require('./src/router.js'));

@@ -1,7 +1,6 @@
 const express = require('express');
 const url = require('url');
 const axios = require('axios');
-const { createBandwidthThrottleGroup } = require('bandwidth-throttle-stream');
 
 const router = express.Router();
 
@@ -35,10 +34,6 @@ router.get('/thumbnail', async (req, res) => {
 	}
 });
 
-const bandwidthThrottleGroup = createBandwidthThrottleGroup({
-	bytesPerSecond: 5242880
-});
-
 router.get('/video', (req, res) => {
 	if (req.query.q) {
 		var parts = url.parse(req.query.q);
@@ -48,15 +43,8 @@ router.get('/video', (req, res) => {
 					axios.get(req.query.q.replace('QUERY', '?'), {
 						responseType: 'stream'
 					}).then((stream) => {
-						try {
-							const throttle = bandwidthThrottleGroup.createBandwidthThrottle(stream.headers['content-length']);
-							stream.data.pipe(throttle).pipe(res);
-							res.writeHead(stream.status, stream.headers);
-						} catch (e) {
-							return res.render('error.ejs', {
-								error: e
-							});
-						}
+						res.writeHead(stream.status, stream.headers);
+						stream.data.pipe(res);
 					}).catch(e => {
 						return res.render('error.ejs', {
 							error: e
