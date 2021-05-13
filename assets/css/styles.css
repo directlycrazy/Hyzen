@@ -13,3 +13,6 @@
 .row{
   margin-bottom: 16px;
 }
+p{
+  margin-bottom: 0 !important;
+}
