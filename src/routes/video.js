@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
 		if (ytdl.validateID(req.query.v) === true) {
 			try {
 				var info = await ytdl.getInfo(req.query.v);
-				if (info.formats.length === 0){
+				if (info.formats.length === 0) {
 					return res.render('error.ejs', {
 						error: 'Could not find any media sources for this video. It may be blocked in the server\'s country.'
 					});
@@ -16,7 +16,8 @@ router.get('/', async (req, res) => {
 				return res.render('video.ejs', {
 					details: info.videoDetails,
 					recommendations: info.related_videos,
-					formats: info.formats
+					formats: info.formats,
+					id: req.query.v
 				});
 			} catch (e) {
 				return res.render('error.ejs', {
