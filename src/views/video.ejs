@@ -66,7 +66,7 @@
                 <label for='format'><b>Video Quality:</b></label>
                 <select name='formats' id='format'>
                     <% formats.forEach(function(format){ %>
-                        <%- (format.hasVideo === true && format.hasAudio === true) ? `<option value='${format.url}'>${format.qualityLabel}</option>` : "" %>
+                        <%- (true) ? `<option value='${format.url}'>${format.qualityLabel} (${format.hasVideo === true ? 'Video' : ''}${format.hasAudio === true ? ', Audio' : ''})</option>` : "" %>
                     <% }); %>
                 </select>
                 <br />
